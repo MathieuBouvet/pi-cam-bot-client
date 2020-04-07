@@ -1,4 +1,9 @@
-nav .brand-logo.brand-label {
+.app {
+  height: 100vh;
+}
+
+nav .brand-logo.brand-label,
+.switch {
   padding-left: 25px;
   padding-right: 25px;
 }
