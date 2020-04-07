@@ -49,7 +49,7 @@ const AppDisplay = ({
           )}
         </div>
         {(!started || iframeLoading) && (
-          <div className="cam-stopped grey">
+          <div className="cam-stopped blue-grey lighten-4">
             <StartCamButton
               isLoading={iframeLoading}
               startClickHandler={startClickHandler}
