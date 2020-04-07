@@ -18,6 +18,7 @@ const StartCamButton = ({ isLoading, startClickHandler }) => (
     <div className="start-cam-text" onClick={startClickHandler}>
       Demarrer le Robot
     </div>
+    {isLoading && <div className="loader"></div>}
   </div>
 );
 
