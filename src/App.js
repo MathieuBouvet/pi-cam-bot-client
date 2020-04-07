@@ -8,7 +8,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="app">
+    <div className="app teal lighten-5">
       <header>
         <Navbar
           alignLinks="right"
