@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 import "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import "material-icons/iconfont/material-icons.css";
-import { Navbar, Icon, Switch, Button } from "react-materialize";
+import { Navbar, Icon, Switch } from "react-materialize";
+
+import StartCamButton from "./StartCamButton";
 
 import "./AppDisplay.css";
 
@@ -41,20 +43,7 @@ const AppDisplay = ({ started, onOffClickHandler, startClickHandler }) => (
         </div>
         {!started && (
           <div className="cam-stopped grey">
-            <div className="start-cam">
-              <Button
-                className="purple darken-4"
-                floating
-                large
-                waves="light"
-                onClick={startClickHandler}
-              >
-                <Icon>power_settings_new</Icon>
-              </Button>
-              <div className="start-cam-text" onClick={startClickHandler}>
-                Demarrer le Robot
-              </div>
-            </div>
+            <StartCamButton isLoading={false} />
           </div>
         )}
       </div>

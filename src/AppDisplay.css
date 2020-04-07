@@ -24,14 +24,3 @@ nav .brand-logo.brand-label,
   align-items: center;
   justify-content: center;
 }
-
-.start-cam {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.start-cam-text {
-  cursor: pointer;
-}
