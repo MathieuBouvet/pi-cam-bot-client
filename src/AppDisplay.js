@@ -12,7 +12,7 @@ import "./AppDisplay.css";
 
 const AppDisplay = ({
   started,
-  iframeLoaded,
+  iframeLoading,
   onOffClickHandler,
   startClickHandler,
   loadIframeHandler,
@@ -51,7 +51,7 @@ const AppDisplay = ({
         {!started && (
           <div className="cam-stopped grey">
             <StartCamButton
-              isLoading={iframeLoaded}
+              isLoading={iframeLoading}
               startClickHandler={startClickHandler}
             />
           </div>
@@ -63,7 +63,7 @@ const AppDisplay = ({
 
 AppDisplay.propTypes = {
   started: PropTypes.bool.isRequired,
-  iframeLoaded: PropTypes.bool.isRequired,
+  iframeLoading: PropTypes.bool.isRequired,
   onOffClickHandler: PropTypes.func.isRequired,
   startClickHandler: PropTypes.func.isRequired,
   loadIframeHandler: PropTypes.func.isRequired,
