@@ -10,7 +10,13 @@ import StartCamButton from "./StartCamButton";
 
 import "./AppDisplay.css";
 
-const AppDisplay = ({ started, onOffClickHandler, startClickHandler }) => (
+const AppDisplay = ({
+  started,
+  iframeLoaded,
+  onOffClickHandler,
+  startClickHandler,
+  loadIframeHandler,
+}) => (
   <div className="app teal lighten-5">
     <header>
       <Navbar
@@ -38,6 +44,7 @@ const AppDisplay = ({ started, onOffClickHandler, startClickHandler }) => (
               src="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0"
               frameBorder="0"
               allowFullScreen
+              onLoad={loadIframeHandler}
             ></iframe>
           )}
         </div>
@@ -53,8 +60,10 @@ const AppDisplay = ({ started, onOffClickHandler, startClickHandler }) => (
 
 AppDisplay.propTypes = {
   started: PropTypes.bool.isRequired,
+  iframeLoaded: PropTypes.bool.isRequired,
   onOffClickHandler: PropTypes.func.isRequired,
   startClickHandler: PropTypes.func.isRequired,
+  loadIframeHandler: PropTypes.func.isRequired,
 };
 
 export default AppDisplay;
