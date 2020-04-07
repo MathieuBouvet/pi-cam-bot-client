@@ -19,6 +19,20 @@ function App() {
           <Switch className="on-off-button" onLabel="on" offLabel="off" />
         </Navbar>
       </header>
+      <div className="content">
+        <div className="video-wrapper">
+          <div className="video-container">
+            <iframe
+              title="cam-bot"
+              width="853"
+              height="480"
+              src="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

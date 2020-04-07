@@ -7,3 +7,9 @@ nav .brand-logo.brand-label,
   padding-left: 25px;
   padding-right: 25px;
 }
+
+.video-wrapper {
+  margin: auto;
+  max-width: 75vw;
+  max-height: 75vh;
+}
