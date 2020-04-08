@@ -13,7 +13,7 @@ const initArrowPressed = () => {
 };
 
 const reducer = (state, action) => {
-  if (!state[action.key]) {
+  if (state[action.key] === undefined) {
     return { ...state };
   }
   switch (action.type) {
