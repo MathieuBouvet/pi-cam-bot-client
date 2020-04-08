@@ -29,6 +29,7 @@ const AppDisplay = ({
           className="on-off-button"
           onLabel="on"
           offLabel="off"
+          checked={started}
           onChange={onOffClickHandler}
         />
       </Navbar>
