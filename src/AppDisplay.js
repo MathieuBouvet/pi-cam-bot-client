@@ -18,7 +18,7 @@ const AppDisplay = ({
   loadIframeHandler,
 }) => (
   <div className="app teal lighten-5">
-    <header>
+    <header className="row">
       <Navbar
         alignLinks="right"
         brand={<span className="brand-label">Py Cam Bot</span>}
@@ -33,7 +33,7 @@ const AppDisplay = ({
         />
       </Navbar>
     </header>
-    <div className="content">
+    <div className="content row">
       <div className="video-wrapper">
         <div className={"video-container"}>
           {started && (
