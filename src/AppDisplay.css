@@ -12,6 +12,8 @@ nav .brand-logo.brand-label,
   position: relative;
   margin: auto;
   width: 75vw;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 .cam-stopped {
