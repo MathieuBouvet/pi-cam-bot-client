@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import AppDisplay from "./AppDisplay";
-import useSwitch from "./switchHook";
+import AppDisplay from "./components/AppDisplay";
+import useSwitch from "./hooks/switchHook";
 
 function App() {
   const [started, toggle, start] = useSwitch(false);
