@@ -8,22 +8,13 @@
 .start-cam-text {
   cursor: pointer;
 }
-@keyframes loader-rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(135deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.loader {
-  border-top: 3px solid #4a148c;
-  border-radius: 100%;
-  position: absolute;
+
+.start-cam-loader {
   width: 160px;
   height: 160px;
-  animation: loader-rotation 1s linear 0ms infinite normal;
+  position: absolute;
+}
+
+.start-cam-loader .spinner-layer {
+  border-color: #4a148c;
 }
