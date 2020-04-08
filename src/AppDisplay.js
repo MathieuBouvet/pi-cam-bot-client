@@ -42,9 +42,10 @@ const AppDisplay = ({
               title="cam-bot"
               width="853"
               height="480"
-              src="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0"
+              src="https://www.youtube.com/embed/G1IbRujko-A?autoplay=1&controls=0&rel=0&showinfo=0"
               frameBorder="0"
               allowFullScreen
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               onLoad={loadIframeHandler}
             ></iframe>
           )}
