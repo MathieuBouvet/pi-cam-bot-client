@@ -28,11 +28,31 @@ const reducer = (state, action) => {
   }
 };
 
+const cameraStateReducer = (state, action) => {
+  switch (action.type) {
+    case "start-cam":
+      return { started: true, streamLoading: true };
+    case "toggle-cam":
+      return {
+        started: !state.cameraStarted,
+        streamLoading: !state.cameraStarted,
+      };
+    case "stream-loaded":
+      return { ...state, streamLoading: false };
+    default:
+      throw new Error("Invalid action type for cameraStateReducer");
+  }
+};
+
 function App() {
   const [started, toggle, start] = useSwitch(false);
   const [cameraStreamLoading, setCameraStreamLoading] = useState(false);
 
   const [arrowPressed, dispatch] = useReducer(reducer, null, initArrowPressed);
+  const [cameraState, dispatchCameraAction] = useReducer(cameraStateReducer, {
+    started: false,
+    streamLoading: false,
+  });
 
   useKeyboardListeners(dispatch);
 
