@@ -1,7 +1,8 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer } from "react";
 
 import AppDisplay from "./components/AppDisplay";
 import useSwitch from "./hooks/switchHook";
+import useKeyboardListeners from "./hooks/useKeyboardListeners";
 
 const initArrowPressed = () => {
   return {
@@ -27,27 +28,12 @@ const reducer = (state, action) => {
 };
 
 function App() {
-  const handleKeyDown = (event) => {
-    if (!event.repeat) {
-      dispatch({ type: "keyDown", key: event.key });
-    }
-  };
-  const handleKeyUp = (event) => {
-    dispatch({ type: "keyUp", key: event.key });
-  };
   const [started, toggle, start] = useSwitch(false);
   const [iframeLoading, setIframeLoading] = useState(false);
 
   const [arrowPressed, dispatch] = useReducer(reducer, null, initArrowPressed);
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("keyup", handleKeyUp);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("keyup", handleKeyUp);
-    };
-  }, []);
+  useKeyboardListeners(dispatch);
 
   const handleOnOffClick = () => {
     toggle();
