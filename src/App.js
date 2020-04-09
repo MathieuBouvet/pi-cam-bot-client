@@ -1,8 +1,9 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 
 import AppDisplay from "./components/AppDisplay";
 import useSwitch from "./hooks/switchHook";
 import useKeyboardListeners from "./hooks/useKeyboardListeners";
+import { updateCamera } from "./helpers/backendRequests";
 
 const initArrowPressed = () => {
   return {
@@ -34,6 +35,12 @@ function App() {
   const [arrowPressed, dispatch] = useReducer(reducer, null, initArrowPressed);
 
   useKeyboardListeners(dispatch);
+
+  useEffect(() => {
+    (async () => {
+      await updateCamera({ started });
+    })();
+  }, [started]);
 
   const handleOnOffClick = () => {
     toggle();
