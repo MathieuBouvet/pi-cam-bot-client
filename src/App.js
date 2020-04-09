@@ -30,7 +30,7 @@ const reducer = (state, action) => {
 
 function App() {
   const [started, toggle, start] = useSwitch(false);
-  const [iframeLoading, setIframeLoading] = useState(false);
+  const [cameraStreamLoading, setCameraStreamLoading] = useState(false);
 
   const [arrowPressed, dispatch] = useReducer(reducer, null, initArrowPressed);
 
@@ -44,22 +44,22 @@ function App() {
 
   const handleOnOffClick = () => {
     toggle();
-    setIframeLoading(!started);
+    setCameraStreamLoading(!started);
   };
   const handleStartClick = () => {
     start();
-    setIframeLoading(true);
+    setCameraStreamLoading(true);
   };
-  const handleIframeLoaded = () => {
-    setIframeLoading(false);
+  const handleCameraStreamLoad = () => {
+    setCameraStreamLoading(false);
   };
   return (
     <AppDisplay
       started={started}
       onOffClickHandler={handleOnOffClick}
       startClickHandler={handleStartClick}
-      loadIframeHandler={handleIframeLoaded}
-      iframeLoading={iframeLoading}
+      cameraStreamLoadHandler={handleCameraStreamLoad}
+      cameraStreamLoading={cameraStreamLoading}
     />
   );
 }
