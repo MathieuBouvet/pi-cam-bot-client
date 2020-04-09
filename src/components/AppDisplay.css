@@ -8,14 +8,21 @@ nav .brand-logo.brand-label,
   padding-right: 25px;
 }
 
-.video-wrapper {
+.camera-stream-wrapper {
   position: relative;
   margin: auto;
   width: 75vw;
+  height: 75vh;
   overflow: hidden;
   border-radius: 8px;
 }
 
+.camera-stream {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: scaleX(-1);
+}
 .cam-stopped {
   position: absolute;
   top: 0;

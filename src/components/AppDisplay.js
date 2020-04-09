@@ -12,10 +12,10 @@ import "./AppDisplay.css";
 
 const AppDisplay = ({
   started,
-  iframeLoading,
+  cameraStreamLoading,
   onOffClickHandler,
   startClickHandler,
-  loadIframeHandler,
+  cameraStreamLoadHandler,
 }) => (
   <div className="app teal lighten-5">
     <header className="row">
@@ -35,25 +35,19 @@ const AppDisplay = ({
       </Navbar>
     </header>
     <div className="content row">
-      <div className="video-wrapper">
-        <div className={"video-container"}>
-          {started && (
-            <iframe
-              title="cam-bot"
-              width="853"
-              height="480"
-              src="https://www.youtube.com/embed/G1IbRujko-A?autoplay=1&controls=0&rel=0&showinfo=0"
-              frameBorder="0"
-              allowFullScreen
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              onLoad={loadIframeHandler}
-            ></iframe>
-          )}
-        </div>
-        {(!started || iframeLoading) && (
+      <div className="camera-stream-wrapper">
+        {started && (
+          <img
+            className="camera-stream blue-grey lighten-4"
+            alt="camera-stream"
+            src="http://localhost:8080/?action=stream"
+            onLoad={cameraStreamLoadHandler}
+          ></img>
+        )}
+        {(!started || cameraStreamLoading) && (
           <div className="cam-stopped blue-grey lighten-4">
             <StartCamButton
-              isLoading={iframeLoading}
+              isLoading={cameraStreamLoading}
               startClickHandler={startClickHandler}
             />
           </div>
@@ -65,10 +59,10 @@ const AppDisplay = ({
 
 AppDisplay.propTypes = {
   started: PropTypes.bool.isRequired,
-  iframeLoading: PropTypes.bool.isRequired,
+  cameraStreamLoading: PropTypes.bool.isRequired,
   onOffClickHandler: PropTypes.func.isRequired,
   startClickHandler: PropTypes.func.isRequired,
-  loadIframeHandler: PropTypes.func.isRequired,
+  cameraStreamLoadHandler: PropTypes.func.isRequired,
 };
 
 export default AppDisplay;
