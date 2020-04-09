@@ -1,7 +1,6 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useReducer, useEffect } from "react";
 
 import AppDisplay from "./components/AppDisplay";
-import useSwitch from "./hooks/switchHook";
 import useKeyboardListeners from "./hooks/useKeyboardListeners";
 import { updateCamera } from "./helpers/backendRequests";
 
@@ -34,8 +33,8 @@ const cameraStateReducer = (state, action) => {
       return { started: true, streamLoading: true };
     case "toggle-cam":
       return {
-        started: !state.cameraStarted,
-        streamLoading: !state.cameraStarted,
+        started: !state.started,
+        streamLoading: !state.started,
       };
     case "stream-loaded":
       return { ...state, streamLoading: false };
@@ -45,11 +44,8 @@ const cameraStateReducer = (state, action) => {
 };
 
 function App() {
-  const [started, toggle, start] = useSwitch(false);
-  const [cameraStreamLoading, setCameraStreamLoading] = useState(false);
-
   const [arrowPressed, dispatch] = useReducer(reducer, null, initArrowPressed);
-  const [cameraState, dispatchCameraAction] = useReducer(cameraStateReducer, {
+  const [camera, dispatchCameraAction] = useReducer(cameraStateReducer, {
     started: false,
     streamLoading: false,
   });
@@ -58,28 +54,19 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      await updateCamera({ started });
+      await updateCamera({ started: camera.started });
     })();
-  }, [started]);
+  }, [camera.started]);
 
-  const handleOnOffClick = () => {
-    toggle();
-    setCameraStreamLoading(!started);
-  };
-  const handleStartClick = () => {
-    start();
-    setCameraStreamLoading(true);
-  };
-  const handleCameraStreamLoad = () => {
-    setCameraStreamLoading(false);
-  };
   return (
     <AppDisplay
-      started={started}
-      onOffClickHandler={handleOnOffClick}
-      startClickHandler={handleStartClick}
-      cameraStreamLoadHandler={handleCameraStreamLoad}
-      cameraStreamLoading={cameraStreamLoading}
+      started={camera.started}
+      onOffClickHandler={() => dispatchCameraAction({ type: "toggle-cam" })}
+      startClickHandler={() => dispatchCameraAction({ type: "start-cam" })}
+      cameraStreamLoadHandler={() =>
+        dispatchCameraAction({ type: "stream-loaded" })
+      }
+      cameraStreamLoading={camera.streamLoading}
     />
   );
 }
