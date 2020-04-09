@@ -7,6 +7,7 @@ import "material-icons/iconfont/material-icons.css";
 import { Navbar, Icon, Switch } from "react-materialize";
 
 import StartCamButton from "./StartCamButton";
+import { cameraStreamUrl } from "../helpers/backendRequests";
 
 import "./AppDisplay.css";
 
@@ -40,7 +41,7 @@ const AppDisplay = ({
           <img
             className="camera-stream blue-grey lighten-4"
             alt="camera-stream"
-            src="http://localhost:8080/?action=stream"
+            src={cameraStreamUrl}
             onLoad={cameraStreamLoadHandler}
           ></img>
         )}
