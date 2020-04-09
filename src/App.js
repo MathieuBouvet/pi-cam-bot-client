@@ -3,6 +3,7 @@ import React, { useReducer, useEffect } from "react";
 import AppDisplay from "./components/AppDisplay";
 import useKeyboardListeners from "./hooks/useKeyboardListeners";
 import { updateCamera } from "./helpers/backendRequests";
+import useCameraState from "./hooks/useCameraState";
 
 const initArrowPressed = () => {
   return {
@@ -27,28 +28,9 @@ const reducer = (state, action) => {
   }
 };
 
-const cameraStateReducer = (state, action) => {
-  switch (action.type) {
-    case "start-cam":
-      return { started: true, streamLoading: true };
-    case "toggle-cam":
-      return {
-        started: !state.started,
-        streamLoading: !state.started,
-      };
-    case "stream-loaded":
-      return { ...state, streamLoading: false };
-    default:
-      throw new Error("Invalid action type for cameraStateReducer");
-  }
-};
-
 function App() {
   const [arrowPressed, dispatch] = useReducer(reducer, null, initArrowPressed);
-  const [camera, dispatchCameraAction] = useReducer(cameraStateReducer, {
-    started: false,
-    streamLoading: false,
-  });
+  const [camera, dispatchCameraAction] = useCameraState();
 
   useKeyboardListeners(dispatch);
 
