@@ -22,7 +22,7 @@ const cameraStateReducer = (state, action) => {
   }
 };
 
-const useCameraState = (initArg, initFunc) => {
+const useCameraState = () => {
   return useReducer(cameraStateReducer, {
     started: false,
     streamReady: false,
