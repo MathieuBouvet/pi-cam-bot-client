@@ -12,9 +12,11 @@ import { cameraStreamUrl } from "../helpers/backendRequests";
 import "./AppDisplay.css";
 
 const AppDisplay = ({
-  started,
-  cameraStreamLoading,
-  streamReady,
+  stopped,
+  starting,
+  ready,
+  loaded,
+  stopping,
   onOffClickHandler,
   startClickHandler,
   cameraStreamLoadHandler,
@@ -31,14 +33,14 @@ const AppDisplay = ({
           className="on-off-button"
           onLabel="on"
           offLabel="off"
-          checked={started}
+          checked={!stopping && !stopped}
           onChange={onOffClickHandler}
         />
       </Navbar>
     </header>
     <div className="content row">
       <div className="camera-stream-wrapper">
-        {started && streamReady && (
+        {(ready || loaded) && (
           <img
             className="camera-stream blue-grey lighten-4"
             alt="camera-stream"
@@ -46,10 +48,10 @@ const AppDisplay = ({
             onLoad={cameraStreamLoadHandler}
           ></img>
         )}
-        {(!started || cameraStreamLoading) && (
+        {!loaded && (
           <div className="cam-stopped blue-grey lighten-4">
             <StartCamButton
-              isLoading={cameraStreamLoading}
+              isLoading={starting}
               startClickHandler={startClickHandler}
             />
           </div>
@@ -60,9 +62,11 @@ const AppDisplay = ({
 );
 
 AppDisplay.propTypes = {
-  started: PropTypes.bool.isRequired,
-  cameraStreamLoading: PropTypes.bool.isRequired,
-  streamReady: PropTypes.bool.isRequired,
+  stopped: PropTypes.bool.isRequired,
+  starting: PropTypes.bool.isRequired,
+  ready: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired,
+  stopping: PropTypes.bool.isRequired,
   onOffClickHandler: PropTypes.func.isRequired,
   startClickHandler: PropTypes.func.isRequired,
   cameraStreamLoadHandler: PropTypes.func.isRequired,

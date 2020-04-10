@@ -13,27 +13,45 @@ function App() {
   useKeyboardListeners(dispatchArrowAction);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await updateCamera({ started: camera.started });
-        const { started: streamReady } = await response.json();
-        if (streamReady) {
+    if (camera.starting) {
+      (async () => {
+        try {
+          const response = await updateCamera({
+            started: camera.starting,
+          });
+          await response.json();
+          dispatchCameraAction({ type: "stream-ready" });
+        } catch (err) {
           dispatchCameraAction({ type: "stream-ready" });
         }
-      } catch (err) {}
-    })();
-  }, [camera.started, dispatchCameraAction]);
+      })();
+    }
+  }, [camera.starting, dispatchCameraAction]);
+
+  useEffect(() => {
+    if (camera.stopping) {
+      (async () => {
+        try {
+          const response = await updateCamera({
+            started: !camera.stopping,
+          });
+          await response.json();
+          dispatchCameraAction({ type: "stop-cam" });
+        } catch (err) {
+          dispatchCameraAction({ type: "stop-cam" });
+        }
+      })();
+    }
+  }, [camera.stopping, dispatchCameraAction]);
 
   return (
     <AppDisplay
-      started={camera.started}
+      {...camera}
       onOffClickHandler={() => dispatchCameraAction({ type: "toggle-cam" })}
       startClickHandler={() => dispatchCameraAction({ type: "start-cam" })}
       cameraStreamLoadHandler={() =>
         dispatchCameraAction({ type: "stream-loaded" })
       }
-      cameraStreamLoading={camera.streamLoading}
-      streamReady={camera.streamReady}
     />
   );
 }
