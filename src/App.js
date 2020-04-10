@@ -14,9 +14,12 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      await updateCamera({ started: camera.started });
+      try {
+        await updateCamera({ started: camera.started });
+        dispatchCameraAction({ type: "stream-ready" });
+      } catch (err) {}
     })();
-  }, [camera.started]);
+  }, [camera.started, dispatchCameraAction]);
 
   return (
     <AppDisplay
@@ -27,6 +30,7 @@ function App() {
         dispatchCameraAction({ type: "stream-loaded" })
       }
       cameraStreamLoading={camera.streamLoading}
+      streamReady={camera.streamReady}
     />
   );
 }

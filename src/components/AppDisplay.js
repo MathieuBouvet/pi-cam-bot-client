@@ -14,6 +14,7 @@ import "./AppDisplay.css";
 const AppDisplay = ({
   started,
   cameraStreamLoading,
+  streamReady,
   onOffClickHandler,
   startClickHandler,
   cameraStreamLoadHandler,
@@ -37,7 +38,7 @@ const AppDisplay = ({
     </header>
     <div className="content row">
       <div className="camera-stream-wrapper">
-        {started && (
+        {started && streamReady && (
           <img
             className="camera-stream blue-grey lighten-4"
             alt="camera-stream"
@@ -61,6 +62,7 @@ const AppDisplay = ({
 AppDisplay.propTypes = {
   started: PropTypes.bool.isRequired,
   cameraStreamLoading: PropTypes.bool.isRequired,
+  streamReady: PropTypes.bool.isRequired,
   onOffClickHandler: PropTypes.func.isRequired,
   startClickHandler: PropTypes.func.isRequired,
   cameraStreamLoadHandler: PropTypes.func.isRequired,
