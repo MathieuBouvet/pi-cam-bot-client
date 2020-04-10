@@ -15,8 +15,11 @@ function App() {
   useEffect(() => {
     (async () => {
       try {
-        await updateCamera({ started: camera.started });
-        dispatchCameraAction({ type: "stream-ready" });
+        const response = await updateCamera({ started: camera.started });
+        const { started: streamReady } = await response.json();
+        if (streamReady) {
+          dispatchCameraAction({ type: "stream-ready" });
+        }
       } catch (err) {}
     })();
   }, [camera.started, dispatchCameraAction]);
