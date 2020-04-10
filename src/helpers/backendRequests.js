@@ -8,5 +8,5 @@ export const updateCamera = async (data) => {
     }),
     body: JSON.stringify(data),
   };
-  return fetch(backendUrl + "/camera", init);
+  return fetch(backendUrl + "/robot/camera", init);
 };
