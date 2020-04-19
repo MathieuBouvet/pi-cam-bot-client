@@ -51,5 +51,9 @@ const useCameraState = () => {
   };
   return [readableState, dispatch];
 };
+function cameraStatusReader(cameraStatus) {
+  return (checkStatus) => cameraStatus === status[checkStatus];
+}
 
 export default useCameraState;
+export { cameraStatusReader };
