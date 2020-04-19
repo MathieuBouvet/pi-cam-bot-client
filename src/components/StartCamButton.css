@@ -5,14 +5,24 @@
   justify-content: center;
 }
 
+.start-cam-button {
+  margin: 7px;
+}
+
 .start-cam-text {
   cursor: pointer;
+  height: 0;
+}
+
+.start-cam-loader-wrapper {
+  width: 70px;
+  height: 70px;
+  position: absolute;
 }
 
 .start-cam-loader {
-  width: 160px;
-  height: 160px;
-  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .start-cam-loader .spinner-layer {

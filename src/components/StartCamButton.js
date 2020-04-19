@@ -7,7 +7,7 @@ import "./StartCamButton.css";
 const StartCamButton = ({ isLoading, startClickHandler, children }) => (
   <div className="start-cam">
     <Button
-      className="purple darken-4"
+      className="purple darken-4 start-cam-button"
       floating
       large
       waves="light"
@@ -19,8 +19,8 @@ const StartCamButton = ({ isLoading, startClickHandler, children }) => (
       {children}
     </div>
     {isLoading && (
-      <div data-testid="loading-indicator">
-        <Preloader className="start-cam-loader" color="blue" />
+      <div data-testid="loading-indicator" className="start-cam-loader-wrapper">
+        <Preloader className="start-cam-loader" color="blue" size="small" />
       </div>
     )}
   </div>
