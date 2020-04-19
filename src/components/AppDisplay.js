@@ -28,7 +28,7 @@ const AppDisplay = ({ camera, dispatchCameraAction }) => {
             onLabel="on"
             offLabel="off"
             checked={!isCamera("stopping") && !isCamera("stopped")}
-            onChange={() => dispatchCameraAction({ type: "toggle-cam" })}
+            onChange={() => dispatchCameraAction("toggle-cam")}
           />
         </Navbar>
       </header>
@@ -39,16 +39,14 @@ const AppDisplay = ({ camera, dispatchCameraAction }) => {
               className="camera-stream blue-grey lighten-4"
               alt="camera-stream"
               src={cameraStreamUrl}
-              onLoad={() => dispatchCameraAction({ type: "stream-loaded" })}
+              onLoad={() => dispatchCameraAction("stream-loaded")}
             ></img>
           )}
           {!isCamera("loaded") && (
             <div className="cam-stopped blue-grey lighten-4">
               <StartCamButton
                 isLoading={isCamera("starting") || isCamera("stopping")}
-                startClickHandler={() =>
-                  dispatchCameraAction({ type: "start-cam" })
-                }
+                startClickHandler={() => dispatchCameraAction("start-cam")}
               >
                 Demarrer la camera
               </StartCamButton>

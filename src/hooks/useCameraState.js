@@ -9,7 +9,7 @@ const status = {
 };
 
 const cameraStateReducer = (state, action) => {
-  switch (action.type) {
+  switch (action) {
     case "start-cam":
       return state === status.stopped ? status.starting : state;
     case "toggle-cam":

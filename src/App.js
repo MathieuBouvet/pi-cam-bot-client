@@ -23,9 +23,9 @@ function App() {
             started: cameraStarting,
           });
           await response.json();
-          dispatchCameraAction({ type: "stream-ready" });
+          dispatchCameraAction("stream-ready");
         } catch (err) {
-          dispatchCameraAction({ type: "stream-ready" });
+          dispatchCameraAction("stream-ready");
         }
       })();
     }
@@ -39,9 +39,9 @@ function App() {
             started: !cameraStopping,
           });
           await response.json();
-          dispatchCameraAction({ type: "stop-cam" });
+          dispatchCameraAction("stop-cam");
         } catch (err) {
-          dispatchCameraAction({ type: "stop-cam" });
+          dispatchCameraAction("stop-cam");
         }
       })();
     }
