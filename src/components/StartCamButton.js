@@ -4,7 +4,7 @@ import { Button, Icon, Preloader } from "react-materialize";
 
 import "./StartCamButton.css";
 
-const StartCamButton = ({ isLoading, startClickHandler }) => (
+const StartCamButton = ({ isLoading, startClickHandler, children }) => (
   <div className="start-cam">
     <Button
       className="purple darken-4"
@@ -16,7 +16,7 @@ const StartCamButton = ({ isLoading, startClickHandler }) => (
       <Icon>power_settings_new</Icon>
     </Button>
     <div className="start-cam-text" onClick={startClickHandler}>
-      Demarrer le Robot
+      {children}
     </div>
     {isLoading && <Preloader className="start-cam-loader" color="blue" />}
   </div>
@@ -25,6 +25,7 @@ const StartCamButton = ({ isLoading, startClickHandler }) => (
 StartCamButton.prototype = {
   isLoading: PropTypes.bool.isRequired,
   startClickHandler: PropTypes.func.isRequired,
+  children: PropTypes.string,
 };
 
 export default StartCamButton;
