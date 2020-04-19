@@ -18,7 +18,11 @@ const StartCamButton = ({ isLoading, startClickHandler, children }) => (
     <div className="start-cam-text" onClick={startClickHandler}>
       {children}
     </div>
-    {isLoading && <Preloader className="start-cam-loader" color="blue" />}
+    {isLoading && (
+      <div data-testid="loading-indicator">
+        <Preloader className="start-cam-loader" color="blue" />
+      </div>
+    )}
   </div>
 );
 
