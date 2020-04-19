@@ -40,20 +40,9 @@ const cameraStateReducer = (state, action) => {
   }
 };
 
-const useCameraState = () => {
-  const [state, dispatch] = useReducer(cameraStateReducer, status.stopped);
-  const readableState = {
-    stopped: state === status.stopped,
-    starting: state === status.starting,
-    ready: state === status.ready,
-    loaded: state === status.loaded,
-    stopping: state === status.stopping,
-  };
-  return [readableState, dispatch];
-};
 function cameraStatusReader(cameraStatus) {
   return (checkStatus) => cameraStatus === status[checkStatus];
 }
 
-export default useCameraState;
+export default () => useReducer(cameraStateReducer, status.stopped);
 export { cameraStatusReader };
