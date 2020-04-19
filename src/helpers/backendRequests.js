@@ -1,4 +1,4 @@
-export const backendUrl = "http://localhost";
+export const backendUrl = "http://localhost:3001";
 export const cameraStreamUrl = "http://localhost:8080/?action=stream";
 export const updateCamera = async (data) => {
   const init = {
