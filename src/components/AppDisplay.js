@@ -12,12 +12,7 @@ import { cameraStatusReader } from "../hooks/useCameraState";
 
 import "./AppDisplay.css";
 
-const AppDisplay = ({
-  camera,
-  onOffClickHandler,
-  startClickHandler,
-  cameraStreamLoadHandler,
-}) => {
+const AppDisplay = ({ camera, dispatchCameraAction }) => {
   const isCamera = cameraStatusReader(camera);
   return (
     <div className="app teal lighten-5">
@@ -33,7 +28,7 @@ const AppDisplay = ({
             onLabel="on"
             offLabel="off"
             checked={!isCamera("stopping") && !isCamera("stopped")}
-            onChange={onOffClickHandler}
+            onChange={() => dispatchCameraAction({ type: "toggle-cam" })}
           />
         </Navbar>
       </header>
@@ -44,14 +39,16 @@ const AppDisplay = ({
               className="camera-stream blue-grey lighten-4"
               alt="camera-stream"
               src={cameraStreamUrl}
-              onLoad={cameraStreamLoadHandler}
+              onLoad={() => dispatchCameraAction({ type: "stream-loaded" })}
             ></img>
           )}
           {!isCamera("loaded") && (
             <div className="cam-stopped blue-grey lighten-4">
               <StartCamButton
                 isLoading={isCamera("starting") || isCamera("stopping")}
-                startClickHandler={startClickHandler}
+                startClickHandler={() =>
+                  dispatchCameraAction({ type: "start-cam" })
+                }
               >
                 Demarrer la camera
               </StartCamButton>
@@ -65,9 +62,7 @@ const AppDisplay = ({
 
 AppDisplay.propTypes = {
   camera: PropTypes.symbol.isRequired,
-  onOffClickHandler: PropTypes.func.isRequired,
-  startClickHandler: PropTypes.func.isRequired,
-  cameraStreamLoadHandler: PropTypes.func.isRequired,
+  dispatchCameraAction: PropTypes.func.isRequired,
 };
 
 export default AppDisplay;

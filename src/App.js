@@ -48,14 +48,7 @@ function App() {
   }, [cameraStopping, dispatchCameraAction]);
 
   return (
-    <AppDisplay
-      camera={camera}
-      onOffClickHandler={() => dispatchCameraAction({ type: "toggle-cam" })}
-      startClickHandler={() => dispatchCameraAction({ type: "start-cam" })}
-      cameraStreamLoadHandler={() =>
-        dispatchCameraAction({ type: "stream-loaded" })
-      }
-    />
+    <AppDisplay camera={camera} dispatchCameraAction={dispatchCameraAction} />
   );
 }
 
