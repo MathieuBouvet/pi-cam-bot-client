@@ -45,4 +45,4 @@ function cameraStatusReader(cameraStatus) {
 }
 
 export default () => useReducer(cameraStateReducer, status.stopped);
-export { cameraStatusReader };
+export { cameraStatusReader, status };
