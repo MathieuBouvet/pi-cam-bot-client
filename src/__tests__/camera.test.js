@@ -61,3 +61,19 @@ test("camera ui render correctly during start and stop phases", async () => {
     expect(queryByText("Demarrer la camera")).toBeInTheDocument()
   );
 });
+
+test("the camera starting phase is also triggered by on-off button", () => {
+  const {
+    queryAllByRole,
+    queryByAltText,
+    queryByRole,
+    queryByTestId,
+    queryByText,
+  } = render(<App />);
+  fireEvent.click(queryAllByRole("checkbox")[0]);
+  expect(queryAllByRole("checkbox")[0]).toBeChecked();
+  expect(queryByAltText("camera-stream")).not.toBeInTheDocument();
+  expect(queryByRole("button")).toBeDisabled();
+  expect(queryByTestId("loading-indicator")).toBeInTheDocument();
+  expect(queryByText("Demarrage de la camera en cours...")).toBeInTheDocument();
+});
