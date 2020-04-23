@@ -13,3 +13,9 @@ export const updateCamera = async (data) => {
   const res = await fetch(backendUrl + "/robot/camera", init);
   return res.json();
 };
+
+export const updateRobot = async (data) => {
+  const init = getInitObject(data);
+  const res = await fetch(backendUrl + "/robot", init);
+  return res.json();
+};
