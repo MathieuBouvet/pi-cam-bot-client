@@ -2,12 +2,15 @@ import React, { useEffect } from "react";
 
 import AppDisplay from "./components/AppDisplay";
 import useKeyboardListeners from "./hooks/useKeyboardListeners";
-import { updateCamera } from "./helpers/backendRequests";
+import { updateCamera, updateRobot } from "./helpers/backendRequests";
 import useCameraState, { cameraStatusReader } from "./hooks/useCameraState";
 import useArrowState from "./hooks/useArrowPressedState";
 
 function App() {
-  const [arrowPressed, dispatchArrowAction] = useArrowState();
+  const [
+    { ArrowUp: up, ArrowDown: down, ArrowLeft: left, ArrowRight: right },
+    dispatchArrowAction,
+  ] = useArrowState();
   const [camera, dispatchCameraAction] = useCameraState();
   const isCamera = cameraStatusReader(camera);
   const cameraStarting = isCamera("starting");
@@ -33,6 +36,10 @@ function App() {
       })();
     }
   }, [cameraStarting, cameraStopping, dispatchCameraAction]);
+
+  useEffect(() => {
+    updateRobot({ up, down, left, right });
+  }, [up, down, left, right]);
 
   return (
     <AppDisplay camera={camera} dispatchCameraAction={dispatchCameraAction} />
