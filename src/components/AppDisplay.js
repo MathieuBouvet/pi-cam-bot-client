@@ -14,6 +14,15 @@ import "./AppDisplay.css";
 
 const AppDisplay = ({ camera, dispatchCameraAction }) => {
   const isCamera = cameraStatusReader(camera);
+  const statusText = (() => {
+    if (isCamera("starting") || isCamera("ready")) {
+      return "Demarrage de la camera en cours...";
+    }
+    if (isCamera("stopping")) {
+      return "Arret de la camera en cours...";
+    }
+    return "Demarrer la camera";
+  })();
   return (
     <div className="app teal lighten-5">
       <header className="row">
@@ -52,7 +61,7 @@ const AppDisplay = ({ camera, dispatchCameraAction }) => {
                 }
                 startClickHandler={() => dispatchCameraAction("start-cam")}
               >
-                Demarrer la camera
+                {statusText}
               </StartCamButton>
             </div>
           )}
