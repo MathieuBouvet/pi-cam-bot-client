@@ -16,36 +16,23 @@ function App() {
   useKeyboardListeners(dispatchArrowAction);
 
   useEffect(() => {
-    if (cameraStarting) {
+    if (cameraStarting || cameraStopping) {
       (async () => {
         try {
           const response = await updateCamera({
-            started: cameraStarting,
+            started: cameraStarting || !cameraStopping,
           });
-          await response.json();
-          dispatchCameraAction("stream-ready");
+          if (response.started) {
+            dispatchCameraAction("stream-ready");
+          } else {
+            dispatchCameraAction("stop-cam");
+          }
         } catch (err) {
-          dispatchCameraAction("stream-ready");
+          console.log(err);
         }
       })();
     }
-  }, [cameraStarting, dispatchCameraAction]);
-
-  useEffect(() => {
-    if (cameraStopping) {
-      (async () => {
-        try {
-          const response = await updateCamera({
-            started: !cameraStopping,
-          });
-          await response.json();
-          dispatchCameraAction("stop-cam");
-        } catch (err) {
-          dispatchCameraAction("stop-cam");
-        }
-      })();
-    }
-  }, [cameraStopping, dispatchCameraAction]);
+  }, [cameraStarting, cameraStopping, dispatchCameraAction]);
 
   return (
     <AppDisplay camera={camera} dispatchCameraAction={dispatchCameraAction} />
