@@ -2,8 +2,23 @@ import React from "react";
 import { render, waitFor, fireEvent } from "@testing-library/react";
 import App from "../App";
 import { updateCamera } from "../helpers/backendRequests";
+
 jest.mock("../helpers/backendRequests");
 updateCamera.mockResolvedValue({ started: true });
+
+const withNamedQueries = ({
+  queryByRole,
+  queryByTestId,
+  queryAllByRole,
+  queryByAltText,
+  queryByText,
+}) => ({
+  onOffSwitch: () => queryAllByRole("checkbox")[0],
+  cameraStream: () => queryByAltText("camera-stream"),
+  mainButton: () => queryByRole("button"),
+  loadingIndicator: () => queryByTestId("loading-indicator"),
+  statusText: (text) => queryByText(text),
+});
 
 test("camera ui render correctly during start and stop phases", async () => {
   const {
