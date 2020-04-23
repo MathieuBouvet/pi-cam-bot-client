@@ -22,73 +22,71 @@ const withNamedQueries = ({
 
 test("camera ui render correctly during start and stop phases", async () => {
   const {
-    queryByRole,
-    queryByTestId,
-    queryAllByRole,
-    queryByAltText,
-    queryByText,
-  } = render(<App />);
-  const startButton = queryByRole("button");
+    onOffSwitch,
+    cameraStream,
+    mainButton,
+    loadingIndicator,
+    statusText,
+  } = withNamedQueries(render(<App />));
 
   // camera is stopped
-  expect(queryAllByRole("checkbox")[0]).not.toBeChecked();
-  expect(queryByAltText("camera-stream")).not.toBeInTheDocument();
-  expect(queryByRole("button")).not.toBeDisabled();
-  expect(queryByTestId("loading-indicator")).not.toBeInTheDocument();
-  expect(queryByText("Demarrer la camera")).toBeInTheDocument();
+  expect(onOffSwitch()).not.toBeChecked();
+  expect(cameraStream()).not.toBeInTheDocument();
+  expect(mainButton()).not.toBeDisabled();
+  expect(loadingIndicator()).not.toBeInTheDocument();
+  expect(statusText("Demarrer la camera")).toBeInTheDocument();
 
-  fireEvent.click(startButton);
+  fireEvent.click(mainButton());
 
   //camera is starting
-  expect(queryAllByRole("checkbox")[0]).toBeChecked();
-  expect(queryByAltText("camera-stream")).not.toBeInTheDocument();
-  expect(queryByRole("button")).toBeDisabled();
-  expect(queryByTestId("loading-indicator")).toBeInTheDocument();
-  expect(queryByText("Demarrage de la camera en cours...")).toBeInTheDocument();
+  expect(onOffSwitch()).toBeChecked();
+  expect(cameraStream()).not.toBeInTheDocument();
+  expect(mainButton()).toBeDisabled();
+  expect(loadingIndicator()).toBeInTheDocument();
+  expect(statusText("Demarrage de la camera en cours...")).toBeInTheDocument();
 
-  await waitFor(() =>
-    expect(queryByAltText("camera-stream")).toBeInTheDocument()
-  );
+  await waitFor(() => expect(cameraStream()).toBeInTheDocument());
   // camera is ready
-  expect(queryAllByRole("checkbox")[0]).toBeChecked();
-  expect(queryByRole("button")).toBeDisabled();
-  expect(queryByTestId("loading-indicator")).toBeInTheDocument();
-  expect(queryByText("Demarrage de la camera en cours...")).toBeInTheDocument();
+  expect(onOffSwitch()).toBeChecked();
+  expect(mainButton()).toBeDisabled();
+  expect(loadingIndicator()).toBeInTheDocument();
+  expect(statusText("Demarrage de la camera en cours...")).toBeInTheDocument();
 
-  fireEvent.load(queryByAltText("camera-stream"));
+  fireEvent.load(cameraStream());
 
   // camera is loaded
-  expect(queryAllByRole("checkbox")[0]).toBeChecked();
-  expect(queryByAltText("camera-stream")).toBeInTheDocument();
-  expect(queryByRole("button")).not.toBeInTheDocument();
-  expect(queryByTestId("loading-indicator")).not.toBeInTheDocument();
+  expect(onOffSwitch()).toBeChecked();
+  expect(cameraStream()).toBeInTheDocument();
+  expect(mainButton()).not.toBeInTheDocument();
+  expect(statusText("loading-indicator")).not.toBeInTheDocument();
 
-  fireEvent.click(queryAllByRole("checkbox")[0]);
+  fireEvent.click(onOffSwitch());
 
   // camera is stopping
-  expect(queryAllByRole("checkbox")[0]).not.toBeChecked();
-  expect(queryByAltText("camera-stream")).not.toBeInTheDocument();
-  expect(queryByRole("button")).toBeDisabled();
-  expect(queryByTestId("loading-indicator")).toBeInTheDocument();
-  expect(queryByText("Arret de la camera en cours...")).toBeInTheDocument();
+  expect(onOffSwitch()).not.toBeChecked();
+  expect(cameraStream()).not.toBeInTheDocument();
+  expect(mainButton()).toBeDisabled();
+  expect(loadingIndicator()).toBeInTheDocument();
+  expect(statusText("Arret de la camera en cours...")).toBeInTheDocument();
 
   await waitFor(() =>
-    expect(queryByText("Demarrer la camera")).toBeInTheDocument()
+    expect(statusText("Demarrer la camera")).toBeInTheDocument()
   );
 });
 
 test("the camera starting phase is also triggered by on-off button", () => {
   const {
-    queryAllByRole,
-    queryByAltText,
-    queryByRole,
-    queryByTestId,
-    queryByText,
-  } = render(<App />);
-  fireEvent.click(queryAllByRole("checkbox")[0]);
-  expect(queryAllByRole("checkbox")[0]).toBeChecked();
-  expect(queryByAltText("camera-stream")).not.toBeInTheDocument();
-  expect(queryByRole("button")).toBeDisabled();
-  expect(queryByTestId("loading-indicator")).toBeInTheDocument();
-  expect(queryByText("Demarrage de la camera en cours...")).toBeInTheDocument();
+    onOffSwitch,
+    cameraStream,
+    mainButton,
+    loadingIndicator,
+    statusText,
+  } = withNamedQueries(render(<App />));
+
+  fireEvent.click(onOffSwitch());
+  expect(onOffSwitch()).toBeChecked();
+  expect(cameraStream()).not.toBeInTheDocument();
+  expect(mainButton()).toBeDisabled();
+  expect(loadingIndicator()).toBeInTheDocument();
+  expect(statusText("Demarrage de la camera en cours...")).toBeInTheDocument();
 });
