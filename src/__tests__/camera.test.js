@@ -75,7 +75,7 @@ test("camera ui render correctly during start and stop phases", async () => {
   );
 });
 
-test("the camera starting phase is also triggered by on-off button", () => {
+test("the camera starting phase is also triggered by on-off button", async () => {
   const {
     onOffSwitch,
     cameraStream,
@@ -90,4 +90,6 @@ test("the camera starting phase is also triggered by on-off button", () => {
   expect(mainButton()).toBeDisabled();
   expect(loadingIndicator()).toBeInTheDocument();
   expect(statusText("Demarrage de la camera en cours...")).toBeInTheDocument();
+
+  await waitFor(() => expect(cameraStream()).toBeInTheDocument());
 });
