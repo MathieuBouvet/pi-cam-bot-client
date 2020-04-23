@@ -36,6 +36,7 @@ test("camera ui render correctly during start and stop phases", async () => {
   expect(loadingIndicator()).not.toBeInTheDocument();
   expect(statusText("Demarrer la camera")).toBeInTheDocument();
 
+  updateCamera.mockResolvedValueOnce({ started: true });
   fireEvent.click(mainButton());
 
   //camera is starting
@@ -61,6 +62,7 @@ test("camera ui render correctly during start and stop phases", async () => {
   expect(mainButton()).not.toBeInTheDocument();
   expect(statusText("loading-indicator")).not.toBeInTheDocument();
 
+  updateCamera.mockResolvedValueOnce({ started: false });
   fireEvent.click(onOffSwitch());
 
   // camera is stopping
@@ -84,7 +86,9 @@ test("the camera starting phase is also triggered by on-off button", async () =>
     statusText,
   } = withNamedQueries(render(<App />));
 
+  updateCamera.mockResolvedValueOnce({ started: true });
   fireEvent.click(onOffSwitch());
+
   expect(onOffSwitch()).toBeChecked();
   expect(cameraStream()).not.toBeInTheDocument();
   expect(mainButton()).toBeDisabled();
