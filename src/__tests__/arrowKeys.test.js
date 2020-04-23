@@ -6,70 +6,80 @@ import { updateRobot } from "../helpers/backendRequests";
 jest.mock("../helpers/backendRequests");
 updateRobot.mockResolvedValue(true);
 
+afterEach(() => {
+  updateRobot.mockClear();
+});
 test("arrow keys are sent to the api", async () => {
   render(<App />);
 
   fireEvent.keyDown(document, { key: "ArrowUp" });
   expect(updateRobot).toHaveBeenCalledWith({
-    ArrowUp: true,
-    ArrowDown: false,
-    ArrowLeft: false,
-    ArrowRight: false,
+    up: true,
+    down: false,
+    left: false,
+    right: false,
   });
 
   fireEvent.keyDown(document, { key: "ArrowDown" });
   expect(updateRobot).toHaveBeenCalledWith({
-    ArrowUp: true,
-    ArrowDown: true,
-    ArrowLeft: false,
-    ArrowRight: false,
+    up: true,
+    down: true,
+    left: false,
+    right: false,
   });
 
   fireEvent.keyDown(document, { key: "ArrowLeft" });
   expect(updateRobot).toHaveBeenCalledWith({
-    ArrowUp: true,
-    ArrowDown: true,
-    ArrowLeft: true,
-    ArrowRight: false,
+    up: true,
+    down: true,
+    left: true,
+    right: false,
   });
 
   fireEvent.keyDown(document, { key: "ArrowRight" });
   expect(updateRobot).toHaveBeenCalledWith({
-    ArrowUp: true,
-    ArrowDown: true,
-    ArrowLeft: true,
-    ArrowRight: true,
+    up: true,
+    down: true,
+    left: true,
+    right: true,
   });
 
   fireEvent.keyUp(document, { key: "ArrowUp" });
   expect(updateRobot).toHaveBeenCalledWith({
-    ArrowUp: false,
-    ArrowDown: true,
-    ArrowLeft: true,
-    ArrowRight: true,
+    up: false,
+    down: true,
+    left: true,
+    right: true,
   });
 
   fireEvent.keyUp(document, { key: "ArrowDown" });
   expect(updateRobot).toHaveBeenCalledWith({
-    ArrowUp: false,
-    ArrowDown: false,
-    ArrowLeft: true,
-    ArrowRight: true,
+    up: false,
+    down: false,
+    left: true,
+    right: true,
   });
 
   fireEvent.keyUp(document, { key: "ArrowLeft" });
   expect(updateRobot).toHaveBeenCalledWith({
-    ArrowUp: false,
-    ArrowDown: false,
-    ArrowLeft: false,
-    ArrowRight: true,
+    up: false,
+    down: false,
+    left: false,
+    right: true,
   });
 
   fireEvent.keyUp(document, { key: "ArrowRight" });
   expect(updateRobot).toHaveBeenCalledWith({
-    ArrowUp: false,
-    ArrowDown: false,
-    ArrowLeft: false,
-    ArrowRight: false,
+    up: false,
+    down: false,
+    left: false,
+    right: false,
   });
+});
+
+test("arrow keys synchronize only when changed", () => {
+  render(<App />);
+  fireEvent.keyDown(document, { key: "ArrowUp" });
+  fireEvent.keyDown(document, { key: "ArrowUp" });
+  expect(updateRobot).toHaveBeenCalledTimes(2);
 });
