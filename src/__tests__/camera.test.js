@@ -46,6 +46,7 @@ test("camera ui render correctly during start and stop phases", async () => {
   expect(statusText("Demarrage de la camera en cours...")).toBeInTheDocument();
 
   await waitFor(() => expect(cameraStream()).toBeInTheDocument());
+
   // camera is ready
   expect(onOffSwitch()).toBeChecked();
   expect(mainButton()).toBeDisabled();
