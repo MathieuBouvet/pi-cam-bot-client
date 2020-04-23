@@ -12,6 +12,7 @@ const StartCamButton = ({ isLoading, startClickHandler, children }) => (
       large
       waves="light"
       onClick={startClickHandler}
+      disabled={isLoading}
     >
       <Icon>power_settings_new</Icon>
     </Button>
