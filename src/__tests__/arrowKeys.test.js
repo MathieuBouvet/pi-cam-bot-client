@@ -83,3 +83,14 @@ test("arrow keys synchronize only when changed", () => {
   fireEvent.keyDown(document, { key: "ArrowUp" });
   expect(updateRobot).toHaveBeenCalledTimes(2);
 });
+
+test("no synchronization when key pressed is not an arrow", () => {
+  render(<App />);
+  fireEvent.keyDown(document, { key: "a" });
+  fireEvent.keyDown(document, { key: "n" });
+  fireEvent.keyDown(document, { key: " " });
+  fireEvent.keyDown(document, { key: "Enter" });
+  fireEvent.keyDown(document, { key: "F1" });
+  fireEvent.keyDown(document, { key: "0" });
+  expect(updateRobot).toHaveBeenCalledTimes(1);
+});
