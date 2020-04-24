@@ -41,7 +41,15 @@ const cameraStateReducer = (state, action) => {
 };
 
 function cameraStatusReader(cameraStatus) {
-  return (checkStatus) => cameraStatus === status[checkStatus];
+  return (checkForStatus) => {
+    const statuses = checkForStatus.split(/ or /i);
+    for (const s of statuses) {
+      if (cameraStatus === status[s]) {
+        return true;
+      }
+    }
+    return false;
+  };
 }
 
 export default () => useReducer(cameraStateReducer, status.stopped);
