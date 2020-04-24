@@ -47,12 +47,14 @@ function App() {
       dispatchArrowAction({ type: "reset" });
       setFocused(false);
     };
-    const onFocusIn = () => setFocused(true);
-    document.addEventListener("focusout", onFocusOut);
-    document.addEventListener("focusin", onFocusIn);
+    const onFocusIn = () => {
+      setFocused(true);
+    };
+    window.addEventListener("blur", onFocusOut);
+    window.addEventListener("focus", onFocusIn);
     return () => {
-      document.removeEventListener("focusout", onFocusOut);
-      document.removeEventListener("focusin", onFocusIn);
+      window.removeEventListener("blur", onFocusOut);
+      window.removeEventListener("focus", onFocusIn);
     };
   }, [dispatchArrowAction]);
 
