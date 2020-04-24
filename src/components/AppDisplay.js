@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import "materialize-css";
@@ -29,6 +29,12 @@ const adjustedStreamWrapperSize = ({ current: streamRef }) => {
 const AppDisplay = ({ camera, dispatchCameraAction }) => {
   const isCamera = cameraStatusReader(camera);
   const cameraStreamRef = useRef(null);
+  const [willChangeWhenWindowResizes, forceRerender] = useState(true);
+  useEffect(() => {
+    const onResize = () => forceRerender(!willChangeWhenWindowResizes);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  });
   const statusText = (() => {
     if (isCamera("starting OR ready")) {
       return "Demarrage de la camera en cours...";
