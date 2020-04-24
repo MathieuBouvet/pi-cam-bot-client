@@ -7,6 +7,7 @@ import "material-icons/iconfont/material-icons.css";
 import { Navbar, Icon, Switch } from "react-materialize";
 
 import StartCamButton from "./StartCamButton";
+import FocusedOut from "./FocusedOut";
 import { cameraStreamUrl } from "../helpers/backendRequests";
 import { cameraStatusReader } from "../hooks/useCameraState";
 
@@ -101,7 +102,7 @@ const AppDisplay = ({
           )}
         </div>
       </div>
-      {!focused && <div>Controle du robot perdu</div>}
+      {!focused && <FocusedOut />}
     </div>
   );
 };
