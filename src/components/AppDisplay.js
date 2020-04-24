@@ -26,7 +26,12 @@ const adjustedStreamWrapperSize = ({ current: streamRef }) => {
   };
 };
 
-const AppDisplay = ({ camera, focused, dispatchCameraAction }) => {
+const AppDisplay = ({
+  camera,
+  focused,
+  dispatchCameraAction,
+  className = "",
+}) => {
   const isCamera = cameraStatusReader(camera);
   const cameraStreamRef = useRef(null);
   const [willChangeWhenWindowResizes, forceRerender] = useState(true);
@@ -51,7 +56,7 @@ const AppDisplay = ({ camera, focused, dispatchCameraAction }) => {
     return "Demarrer la camera";
   })();
   return (
-    <div className="app teal lighten-5">
+    <div className={`app teal lighten-5 ${className}`}>
       <header className="row">
         <Navbar
           alignLinks="right"
