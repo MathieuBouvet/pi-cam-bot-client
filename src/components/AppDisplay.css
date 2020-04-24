@@ -11,10 +11,15 @@ nav .brand-logo.brand-label,
 .camera-stream-wrapper {
   position: relative;
   margin: auto;
+  max-width: 75vw;
+  max-height: 75vh;
   width: 75vw;
   height: 75vh;
   overflow: hidden;
   border-radius: 8px;
+}
+.camera-stream-wrapper.smoothed {
+  transition: width 1s, height 1s;
 }
 
 .camera-stream {
