@@ -10,7 +10,7 @@ const initArrowPressed = () => {
 };
 
 const arrowPressedReducer = (state, action) => {
-  if (state[action.key] === undefined) {
+  if (state[action.key] === undefined && action.type !== "reset") {
     return { ...state };
   }
   switch (action.type) {
@@ -18,6 +18,8 @@ const arrowPressedReducer = (state, action) => {
       return { ...state, [action.key]: true };
     case "keyUp":
       return { ...state, [action.key]: false };
+    case "reset":
+      return initArrowPressed();
     default:
       throw new Error("Invalid action type for the reducer");
   }
