@@ -71,7 +71,7 @@ const AppDisplay = ({ camera, dispatchCameraAction }) => {
       <div className="content row">
         <div
           className={`camera-stream-wrapper ${
-            isCamera("loaded") ? "smoothed" : ""
+            isCamera("loaded OR stopped") ? "smoothed" : ""
           }`}
           style={adjustedStreamWrapperSize(cameraStreamRef)}
         >
