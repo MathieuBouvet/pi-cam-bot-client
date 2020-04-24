@@ -30,7 +30,7 @@ const AppDisplay = ({ camera, dispatchCameraAction }) => {
   const isCamera = cameraStatusReader(camera);
   const cameraStreamRef = useRef(null);
   const statusText = (() => {
-    if (isCamera("starting") || isCamera("ready")) {
+    if (isCamera("starting OR ready")) {
       return "Demarrage de la camera en cours...";
     }
     if (isCamera("stopping")) {
@@ -51,7 +51,7 @@ const AppDisplay = ({ camera, dispatchCameraAction }) => {
             className="on-off-button"
             onLabel="on"
             offLabel="off"
-            checked={!isCamera("stopping") && !isCamera("stopped")}
+            checked={isCamera("starting OR ready OR loaded")}
             onChange={() => dispatchCameraAction("toggle-cam")}
           />
         </Navbar>
@@ -63,7 +63,7 @@ const AppDisplay = ({ camera, dispatchCameraAction }) => {
           }`}
           style={adjustedStreamWrapperSize(cameraStreamRef)}
         >
-          {(isCamera("ready") || isCamera("loaded")) && (
+          {isCamera("ready OR loaded") && (
             <img
               className="camera-stream blue-grey lighten-4"
               alt="camera-stream"
@@ -75,11 +75,7 @@ const AppDisplay = ({ camera, dispatchCameraAction }) => {
           {!isCamera("loaded") && (
             <div className="cam-stopped blue-grey lighten-4">
               <StartCamButton
-                isLoading={
-                  isCamera("starting") ||
-                  isCamera("stopping") ||
-                  isCamera("ready")
-                }
+                isLoading={isCamera("starting OR stopping OR ready")}
                 startClickHandler={() => dispatchCameraAction("start-cam")}
               >
                 {statusText}
