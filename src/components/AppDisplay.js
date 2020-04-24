@@ -31,9 +31,15 @@ const AppDisplay = ({ camera, dispatchCameraAction }) => {
   const cameraStreamRef = useRef(null);
   const [willChangeWhenWindowResizes, forceRerender] = useState(true);
   useEffect(() => {
-    const onResize = () => forceRerender(!willChangeWhenWindowResizes);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const onResizeDebounced = () => {
+      let timer = null;
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        forceRerender(!willChangeWhenWindowResizes);
+      }, 250);
+    };
+    window.addEventListener("resize", onResizeDebounced);
+    return () => window.removeEventListener("resize", onResizeDebounced);
   });
   const statusText = (() => {
     if (isCamera("starting OR ready")) {
