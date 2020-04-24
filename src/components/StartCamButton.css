@@ -28,3 +28,7 @@
 .start-cam-loader .spinner-layer {
   border-color: #4a148c;
 }
+
+.start-cam button.start-cam-button.disabled:disabled {
+  background-color: rgba(74, 20, 140, 0.38) !important;
+}
