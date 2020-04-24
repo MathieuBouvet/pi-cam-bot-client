@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import AppDisplay from "./components/AppDisplay";
 import useKeyboardListeners from "./hooks/useKeyboardListeners";
@@ -12,6 +12,7 @@ function App() {
     dispatchArrowAction,
   ] = useArrowState();
   const [camera, dispatchCameraAction] = useCameraState();
+  const [focused, setFocused] = useState(true);
   const isCamera = cameraStatusReader(camera);
   const cameraStarting = isCamera("starting");
   const cameraStopping = isCamera("stopping");
@@ -41,8 +42,26 @@ function App() {
     updateRobot({ up, down, left, right });
   }, [up, down, left, right]);
 
+  useEffect(() => {
+    const onFocusOut = () => {
+      dispatchArrowAction({ type: "reset" });
+      setFocused(false);
+    };
+    const onFocusIn = () => setFocused(true);
+    document.addEventListener("focusout", onFocusOut);
+    document.addEventListener("focusin", onFocusIn);
+    return () => {
+      document.removeEventListener("focusout", onFocusOut);
+      document.removeEventListener("focusin", onFocusIn);
+    };
+  }, [dispatchArrowAction]);
+
   return (
-    <AppDisplay camera={camera} dispatchCameraAction={dispatchCameraAction} />
+    <AppDisplay
+      camera={camera}
+      dispatchCameraAction={dispatchCameraAction}
+      focused={focused}
+    />
   );
 }
 

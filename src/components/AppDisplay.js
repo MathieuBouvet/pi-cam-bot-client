@@ -26,7 +26,7 @@ const adjustedStreamWrapperSize = ({ current: streamRef }) => {
   };
 };
 
-const AppDisplay = ({ camera, dispatchCameraAction }) => {
+const AppDisplay = ({ camera, focused, dispatchCameraAction }) => {
   const isCamera = cameraStatusReader(camera);
   const cameraStreamRef = useRef(null);
   const [willChangeWhenWindowResizes, forceRerender] = useState(true);
@@ -96,12 +96,14 @@ const AppDisplay = ({ camera, dispatchCameraAction }) => {
           )}
         </div>
       </div>
+      {!focused && <div>Controle du robot perdu</div>}
     </div>
   );
 };
 
 AppDisplay.propTypes = {
   camera: PropTypes.symbol.isRequired,
+  focused: PropTypes.bool.isRequired,
   dispatchCameraAction: PropTypes.func.isRequired,
 };
 
