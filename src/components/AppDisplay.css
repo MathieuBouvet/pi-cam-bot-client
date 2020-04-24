@@ -37,3 +37,15 @@ nav .brand-logo.brand-label,
   align-items: center;
   justify-content: center;
 }
+
+.switch label input[type="checkbox"]:checked + .lever {
+  background-color: rgba(255, 255, 255, 0.62);
+}
+
+.switch label input[type="checkbox"]:checked + .lever:after {
+  background-color: #fff;
+}
+
+.switch label {
+  color: #fff;
+}
