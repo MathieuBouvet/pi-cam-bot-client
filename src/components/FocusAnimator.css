@@ -1,4 +1,4 @@
-.focused-animator {
+.focus-animator {
   position: absolute;
   overflow: hidden;
   z-index: 10;
@@ -9,7 +9,7 @@
   backdrop-filter: blur(2px);
 }
 
-.focused-animator .app-wrapper {
+.focus-animator .app-wrapper {
   position: absolute;
   top: 0;
   clip-path: circle(100%);

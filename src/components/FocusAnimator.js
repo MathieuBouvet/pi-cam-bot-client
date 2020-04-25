@@ -19,7 +19,7 @@ const FocusAnimator = ({ camera, animator, dispatchAnimatorAction }) => {
     }
   })();
   return (
-    <div className="focused-animator">
+    <div className="focus-animator">
       <div
         className="app-wrapper"
         style={clipPath}
