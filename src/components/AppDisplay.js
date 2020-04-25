@@ -7,7 +7,7 @@ import "material-icons/iconfont/material-icons.css";
 import { Navbar, Icon, Switch } from "react-materialize";
 
 import StartCamButton from "./StartCamButton";
-import { cameraStreamUrl } from "../helpers/backendRequests";
+import { cameraStreamUrl, cameraSnapshotUrl } from "../helpers/backendRequests";
 import { cameraStatusReader } from "../hooks/useCameraState";
 
 import "./AppDisplay.css";
@@ -77,7 +77,7 @@ const AppDisplay = ({ camera, focused, dispatchCameraAction }) => {
             <img
               className="camera-stream"
               alt="camera-stream"
-              src={cameraStreamUrl}
+              src={focused ? cameraStreamUrl : cameraSnapshotUrl}
               onLoad={() => dispatchCameraAction("stream-loaded")}
               ref={cameraStreamRef}
             ></img>
@@ -100,6 +100,7 @@ const AppDisplay = ({ camera, focused, dispatchCameraAction }) => {
 
 AppDisplay.propTypes = {
   camera: PropTypes.symbol.isRequired,
+  focused: PropTypes.bool.isRequired,
   dispatchCameraAction: PropTypes.func.isRequired,
 };
 
