@@ -70,14 +70,12 @@ const AppDisplay = ({ camera, focused, dispatchCameraAction }) => {
       </header>
       <div className="content row">
         <div
-          className={`camera-stream-wrapper ${
-            isCamera("loaded OR stopped") ? "smoothed" : ""
-          }`}
+          className={`camera-stream-wrapper`}
           style={adjustedStreamWrapperSize(cameraStreamRef)}
         >
           {isCamera("ready OR loaded OR reloading") && (
             <img
-              className="camera-stream blue-grey lighten-4"
+              className="camera-stream"
               alt="camera-stream"
               src={cameraStreamUrl}
               onLoad={() => dispatchCameraAction("stream-loaded")}
