@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import AppDisplay from "./components/AppDisplay";
 import FocusAnimator from "./components/FocusAnimator";
 import useKeyboardListeners from "./hooks/useKeyboardListeners";
 import { updateCamera, updateRobot } from "./helpers/backendRequests";
 import useCameraState, { cameraStatusReader } from "./hooks/useCameraState";
+import useFocusAnimatorState, {
+  focusAnmatorStateReader,
+} from "./hooks/useFocusAnimatorState";
 import useArrowState from "./hooks/useArrowPressedState";
 
 function App() {
@@ -13,10 +16,13 @@ function App() {
     dispatchArrowAction,
   ] = useArrowState();
   const [camera, dispatchCameraAction] = useCameraState();
-  const [focused, setFocused] = useState(true);
+  const [animator, dispatchAnimatorAction] = useFocusAnimatorState();
+
   const isCamera = cameraStatusReader(camera);
   const cameraStarting = isCamera("starting");
   const cameraStopping = isCamera("stopping");
+
+  const isAnimator = focusAnmatorStateReader(animator);
 
   useKeyboardListeners(dispatchArrowAction);
 
@@ -46,10 +52,10 @@ function App() {
   useEffect(() => {
     const onFocusOut = () => {
       dispatchArrowAction({ type: "reset" });
-      setFocused(false);
+      dispatchAnimatorAction("start");
     };
     const onFocusIn = () => {
-      setFocused(true);
+      dispatchAnimatorAction("unblur");
     };
     window.addEventListener("blur", onFocusOut);
     window.addEventListener("focus", onFocusIn);
@@ -57,12 +63,14 @@ function App() {
       window.removeEventListener("blur", onFocusOut);
       window.removeEventListener("focus", onFocusIn);
     };
-  }, [dispatchArrowAction]);
+  }, [dispatchArrowAction, dispatchAnimatorAction]);
 
   return (
     <>
       <AppDisplay camera={camera} dispatchCameraAction={dispatchCameraAction} />
-      {!focused && <FocusAnimator camera={camera} />}
+      {!isAnimator("stopped") && (
+        <FocusAnimator camera={camera} animator={animator} />
+      )}
     </>
   );
 }
