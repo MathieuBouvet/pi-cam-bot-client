@@ -1,4 +1,4 @@
-.focused-out {
+.focused-animator {
   position: absolute;
   overflow: hidden;
   z-index: 10;
@@ -9,13 +9,13 @@
   backdrop-filter: blur(2px);
 }
 
-.focused-out .app {
+.focused-animator .app {
   position: absolute;
   top: 0;
   clip-path: circle(100%);
   transition: clip-path 1s;
 }
 
-.focused-out .app.clipped {
+.focused-animator .app.clipped {
   clip-path: circle(0% at center);
 }
