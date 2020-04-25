@@ -14,9 +14,7 @@ const FocusAnimator = ({ camera, animator, dispatchAnimatorAction }) => {
     if (isAnimator("blurring OR blurred")) {
       return { clipPath: "circle(0% at center)" };
     }
-    if (isAnimator("unblurring")) {
       return { clipPath: "circle(100% at center)" };
-    }
   })();
   return (
     <div className="focus-animator">

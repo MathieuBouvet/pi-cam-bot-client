@@ -12,6 +12,5 @@
 .focus-animator .app-wrapper {
   position: absolute;
   top: 0;
-  clip-path: circle(100%);
   transition: clip-path 750ms;
 }
