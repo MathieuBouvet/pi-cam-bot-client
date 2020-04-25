@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import stateReader from "../helpers/stateReader";
 
 const status = {
   stopped: Symbol("stopped"),
@@ -40,17 +41,7 @@ const cameraStateReducer = (state, action) => {
   }
 };
 
-function cameraStatusReader(cameraStatus) {
-  return (checkForStatus) => {
-    const statuses = checkForStatus.split(/ or /i);
-    for (const s of statuses) {
-      if (cameraStatus === status[s]) {
-        return true;
-      }
-    }
-    return false;
-  };
-}
+const cameraStatusReader = stateReader(status);
 
 export default () => useReducer(cameraStateReducer, status.stopped);
 export { cameraStatusReader, status };
