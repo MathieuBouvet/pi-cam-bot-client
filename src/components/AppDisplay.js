@@ -63,7 +63,7 @@ const AppDisplay = ({ camera, focused, dispatchCameraAction }) => {
             className="on-off-button"
             onLabel="on"
             offLabel="off"
-            checked={isCamera("starting OR ready OR loaded")}
+            checked={isCamera("starting OR ready OR loaded OR reloading")}
             onChange={() => dispatchCameraAction("toggle-cam")}
           />
         </Navbar>
@@ -75,7 +75,7 @@ const AppDisplay = ({ camera, focused, dispatchCameraAction }) => {
           }`}
           style={adjustedStreamWrapperSize(cameraStreamRef)}
         >
-          {isCamera("ready OR loaded") && (
+          {isCamera("ready OR loaded OR reloading") && (
             <img
               className="camera-stream blue-grey lighten-4"
               alt="camera-stream"
@@ -84,7 +84,7 @@ const AppDisplay = ({ camera, focused, dispatchCameraAction }) => {
               ref={cameraStreamRef}
             ></img>
           )}
-          {!isCamera("loaded") && (
+          {!isCamera("loaded OR reloading") && (
             <div className="cam-stopped blue-grey lighten-4">
               <StartCamButton
                 isLoading={isCamera("starting OR stopping OR ready")}
