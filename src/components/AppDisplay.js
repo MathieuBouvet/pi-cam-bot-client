@@ -7,7 +7,6 @@ import "material-icons/iconfont/material-icons.css";
 import { Navbar, Icon, Switch } from "react-materialize";
 
 import StartCamButton from "./StartCamButton";
-import FocusedOut from "./FocusedOut";
 import { cameraStreamUrl } from "../helpers/backendRequests";
 import { cameraStatusReader } from "../hooks/useCameraState";
 
@@ -102,14 +101,12 @@ const AppDisplay = ({
           )}
         </div>
       </div>
-      {!focused && <FocusedOut />}
     </div>
   );
 };
 
 AppDisplay.propTypes = {
   camera: PropTypes.symbol.isRequired,
-  focused: PropTypes.bool.isRequired,
   dispatchCameraAction: PropTypes.func.isRequired,
 };
 

@@ -59,11 +59,7 @@ function App() {
   }, [dispatchArrowAction]);
 
   return (
-    <AppDisplay
-      camera={camera}
-      dispatchCameraAction={dispatchCameraAction}
-      focused={focused}
-    />
+    <AppDisplay camera={camera} dispatchCameraAction={dispatchCameraAction} />
   );
 }
 
