@@ -43,5 +43,7 @@ const cameraStateReducer = (state, action) => {
 
 const cameraStatusReader = stateReader(status);
 
-export default () => useReducer(cameraStateReducer, status.stopped);
+export default function useCameraState() {
+  return useReducer(cameraStateReducer, status.stopped);
+}
 export { cameraStatusReader, status };

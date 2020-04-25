@@ -41,5 +41,7 @@ const focusAnimatorReducer = (state, action) => {
 
 const focusAnmatorStateReader = stateReader(possibleStates);
 
-export default () => useReducer(focusAnimatorReducer, possibleStates.stopped);
+export default function useFocusAnimatorState() {
+  return useReducer(focusAnimatorReducer, possibleStates.stopped);
+}
 export { focusAnmatorStateReader, possibleStates };
