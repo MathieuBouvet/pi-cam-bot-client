@@ -67,7 +67,11 @@ function App() {
 
   return (
     <>
-      <AppDisplay camera={camera} dispatchCameraAction={dispatchCameraAction} />
+      <AppDisplay
+        camera={camera}
+        dispatchCameraAction={dispatchCameraAction}
+        focused={isAnimator("stopped")}
+      />
       {!isAnimator("stopped") && (
         <FocusAnimator
           camera={camera}
