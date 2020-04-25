@@ -1,25 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { focusAnmatorStateReader } from "../hooks/useFocusAnimatorState";
 import PropTypes from "prop-types";
 import AppDisplay from "./AppDisplay";
 import "./FocusAnimator.css";
 
-const FocusAnimator = ({ camera }) => {
-  const [clip, setClip] = useState(false);
+const FocusAnimator = ({ camera, animator, dispatchAnimatorAction }) => {
+  const isAnimator = focusAnmatorStateReader(animator);
   useEffect(() => {
-    setTimeout(setClip, 0, true);
-  }, []);
+    dispatchAnimatorAction("blur");
+  }, [dispatchAnimatorAction]);
+
+  const clipPath = (() => {
+    if (isAnimator("blurring OR blurred")) {
+      return { clipPath: "circle(0% at center)" };
+    }
+    if (isAnimator("unblurring")) {
+      return { clipPath: "circle(100% at center)" };
+    }
+  })();
   return (
     <div className="focused-animator">
-      <AppDisplay
-        camera={camera}
-        dispatchCameraAction={() => null}
-        className={clip ? "clipped" : ""}
-      />
+      <div
+        className="app-wrapper"
+        style={clipPath}
+        onTransitionEnd={() => dispatchAnimatorAction("transition-ended")}
+      >
+        <AppDisplay camera={camera} dispatchCameraAction={() => null} />
+      </div>
     </div>
   );
 };
 
 FocusAnimator.protoTypes = {
   camera: PropTypes.symbol.isRequired,
+  animator: PropTypes.symbol.isRequired,
+  dispatchAnimatorAction: PropTypes.func.isRequired,
 };
 export default FocusAnimator;

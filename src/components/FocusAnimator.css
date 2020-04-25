@@ -9,13 +9,9 @@
   backdrop-filter: blur(2px);
 }
 
-.focused-animator .app {
+.focused-animator .app-wrapper {
   position: absolute;
   top: 0;
   clip-path: circle(100%);
-  transition: clip-path 1s;
-}
-
-.focused-animator .app.clipped {
-  clip-path: circle(0% at center);
+  transition: clip-path 750ms;
 }
