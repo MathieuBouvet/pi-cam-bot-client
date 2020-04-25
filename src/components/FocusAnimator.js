@@ -14,7 +14,7 @@ const FocusAnimator = ({ camera, animator, dispatchAnimatorAction }) => {
     if (isAnimator("blurring OR blurred")) {
       return { clipPath: "circle(0% at center)" };
     }
-      return { clipPath: "circle(100% at center)" };
+    return { clipPath: "circle(100% at center)" };
   })();
   return (
     <div className="focus-animator">
@@ -23,7 +23,11 @@ const FocusAnimator = ({ camera, animator, dispatchAnimatorAction }) => {
         style={clipPath}
         onTransitionEnd={() => dispatchAnimatorAction("transition-ended")}
       >
-        <AppDisplay camera={camera} dispatchCameraAction={() => null} />
+        <AppDisplay
+          camera={camera}
+          dispatchCameraAction={() => null}
+          focused={false}
+        />
       </div>
     </div>
   );
