@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import AppDisplay from "./components/AppDisplay";
+import FocusAnimator from "./components/FocusAnimator";
 import useKeyboardListeners from "./hooks/useKeyboardListeners";
 import { updateCamera, updateRobot } from "./helpers/backendRequests";
 import useCameraState, { cameraStatusReader } from "./hooks/useCameraState";
@@ -59,7 +60,10 @@ function App() {
   }, [dispatchArrowAction]);
 
   return (
-    <AppDisplay camera={camera} dispatchCameraAction={dispatchCameraAction} />
+    <>
+      <AppDisplay camera={camera} dispatchCameraAction={dispatchCameraAction} />
+      {!focused && <FocusAnimator camera={camera} />}
+    </>
   );
 }
 
