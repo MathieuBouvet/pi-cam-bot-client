@@ -52,7 +52,7 @@ function App() {
   useEffect(() => {
     const onFocusOut = () => {
       dispatchArrowAction({ type: "reset" });
-      dispatchAnimatorAction("start");
+      dispatchAnimatorAction("blur");
     };
     const onFocusIn = () => {
       dispatchAnimatorAction("unblur");
