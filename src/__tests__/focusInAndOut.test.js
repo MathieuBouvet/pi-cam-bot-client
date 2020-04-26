@@ -7,11 +7,11 @@ jest.mock("../helpers/backendRequests");
 updateRobot.mockResolvedValue({ ok: true });
 
 test("app focus lifecycle works as expected", async () => {
-  const focusLostText = "Controle du robot perdu";
+  const focusLostText = "Cliquez n'importe où pour reprendre le contôle";
   const { queryByText } = render(<App />);
   fireEvent.keyDown(document, { key: "ArrowUp" });
   updateRobot.mockClear();
-  fireEvent.focusOut(document);
+  fireEvent.blur(window);
   expect(queryByText(focusLostText)).toBeInTheDocument();
   expect(updateRobot).toHaveBeenCalledWith({
     up: false,
@@ -19,6 +19,6 @@ test("app focus lifecycle works as expected", async () => {
     left: false,
     right: false,
   });
-  fireEvent.focusIn(document);
+  fireEvent.focus(window);
   expect(queryByText(focusLostText)).not.toBeInTheDocument();
 });
