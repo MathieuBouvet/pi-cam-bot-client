@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { focusAnmatorStateReader } from "../hooks/useFocusAnimatorState";
 import PropTypes from "prop-types";
 import AppDisplay from "./AppDisplay";
@@ -6,15 +6,12 @@ import "./FocusAnimator.css";
 
 const FocusAnimator = ({ camera, animator, dispatchAnimatorAction }) => {
   const isAnimator = focusAnmatorStateReader(animator);
-  useEffect(() => {
-    dispatchAnimatorAction("blur");
-  }, [dispatchAnimatorAction]);
 
   const clipPath = (() => {
-    if (isAnimator("blurring OR blurred")) {
+    if (isAnimator("blurred")) {
       return { clipPath: "circle(0% at center)" };
     }
-      return { clipPath: "circle(100% at center)" };
+    return { clipPath: "circle(100% at center)" };
   })();
   return (
     <div className="focus-animator">
