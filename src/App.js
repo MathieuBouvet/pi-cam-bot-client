@@ -52,7 +52,6 @@ function App() {
   useEffect(() => {
     const onFocusOut = () => {
       dispatchArrowAction({ type: "reset" });
-      dispatchCameraAction("reload");
       dispatchAnimatorAction("start");
     };
     const onFocusIn = () => {
@@ -64,7 +63,7 @@ function App() {
       window.removeEventListener("blur", onFocusOut);
       window.removeEventListener("focus", onFocusIn);
     };
-  }, [dispatchArrowAction, dispatchAnimatorAction, dispatchCameraAction]);
+  }, [dispatchArrowAction, dispatchAnimatorAction]);
 
   return (
     <>
