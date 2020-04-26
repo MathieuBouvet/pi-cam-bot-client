@@ -83,7 +83,7 @@ const AppDisplay = ({ camera, focused, dispatchCameraAction }) => {
             ></img>
           )}
           {!isCamera("loaded") && (
-            <div className="cam-stopped blue-grey lighten-4">
+            <div className="cam-stopped">
               <StartCamButton
                 isLoading={isCamera("starting OR stopping OR ready")}
                 startClickHandler={() => dispatchCameraAction("start-cam")}
