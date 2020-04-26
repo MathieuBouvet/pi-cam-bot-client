@@ -15,3 +15,11 @@
   top: 0;
   transition: clip-path 750ms;
 }
+
+.focus-animator-text {
+  position: absolute;
+  color: #4a148c;
+  bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
