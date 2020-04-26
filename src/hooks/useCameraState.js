@@ -6,7 +6,6 @@ const status = {
   starting: Symbol("starting"),
   ready: Symbol("ready"),
   loaded: Symbol("loaded"),
-  reloading: Symbol("reloading"),
   stopping: Symbol("stopping"),
 };
 
@@ -23,7 +22,7 @@ const cameraStateReducer = (state, action) => {
       }
       return state;
     case "stream-loaded":
-      if (state === status.ready || state === status.reloading) {
+      if (state === status.ready) {
         return status.loaded;
       }
       return state;
@@ -35,12 +34,6 @@ const cameraStateReducer = (state, action) => {
     case "stop-cam":
       if (state === status.stopping) {
         return status.stopped;
-      }
-      return state;
-
-    case "reload":
-      if (state === status.loaded) {
-        return status.reloading;
       }
       return state;
     default:
