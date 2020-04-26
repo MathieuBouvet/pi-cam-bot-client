@@ -22,6 +22,11 @@ const FocusAnimator = ({ camera, animator, dispatchAnimatorAction }) => {
       >
         <AppDisplay camera={camera} dispatchCameraAction={() => null} />
       </div>
+      {!isAnimator("unblurring") && (
+        <div className="focus-animator-text">
+          Cliquez n'importe où pour reprendre le contôle
+        </div>
+      )}
     </div>
   );
 };
