@@ -31,7 +31,7 @@ const FocusAnimator = ({ camera, animator, dispatchAnimatorAction }) => {
   );
 };
 
-FocusAnimator.protoTypes = {
+FocusAnimator.propTypes = {
   camera: PropTypes.symbol.isRequired,
   animator: PropTypes.symbol.isRequired,
   dispatchAnimatorAction: PropTypes.func.isRequired,
