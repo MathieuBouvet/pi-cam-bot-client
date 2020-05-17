@@ -55,7 +55,7 @@ const AppDisplay = ({ camera, focused, dispatchCameraAction }) => {
       <header className="row">
         <Navbar
           alignLinks="right"
-          brand={<span className="brand-label">Py Cam Bot</span>}
+          brand={<span className="brand-label">Pi Cam Bot</span>}
           menuIcon={<Icon>menu</Icon>}
           className="purple darken-4"
         >
