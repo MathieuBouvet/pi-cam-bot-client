@@ -1,4 +1,4 @@
-export const backendUrl = "http://localhost:3001";
+export const backendUrl = "http://192.168.1.77:3000";
 export const cameraStreamUrl = "http://localhost:8080/?action=stream";
 export const cameraSnapshotUrl = "http://localhost:8080/?action=snapshot";
 
@@ -17,6 +17,5 @@ export const updateCamera = async (data) => {
 
 export const updateRobot = async (data) => {
   const init = getInitObject(data);
-  const res = await fetch(backendUrl + "/robot", init);
-  return res.json();
+  await fetch(backendUrl + "/robot/movement", init);
 };
